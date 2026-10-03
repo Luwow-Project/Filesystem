@@ -10,7 +10,7 @@
 namespace fs = std::filesystem;
 
 namespace Luwow::Fs {
-    ILuauModule* Library::initialize(Engine* engine) {
+    ILuauModule* Library::initialize(ILuauHost* host) {
         return new Library();
     }
 
@@ -299,3 +299,5 @@ namespace Luwow::Fs {
         return exports;
     }
 } // namespace Luwow::Fs
+
+LUWOW_REGISTER_MODULE(Luwow::Fs::Library)
