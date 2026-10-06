@@ -7,6 +7,7 @@
 namespace Luwow::Fs {
     using ILuauModule = Luwow::Engine::ILuauModule;
     using ILuauHost = Luwow::Engine::ILuauHost;
+    using RunMode = Luwow::Engine::RunMode;
 
     class Library : public ILuauModule {
     public:
@@ -14,6 +15,7 @@ namespace Luwow::Fs {
         ~Library() override = default;
 
         ILuauModule* initialize(ILuauHost* host) override;
+        RunMode getRunMode() const override;
 
         const char* getModuleName() const override;
         const char* getModuleAlias() const override;

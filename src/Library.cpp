@@ -295,6 +295,10 @@ namespace Luwow::Fs {
         { nullptr, nullptr }
     };
 
+    Luwow::Engine::RunMode Library::getRunMode() const {
+        return LUWOW_MODULE_RUN_MODE;
+    }
+
     const LuauExport* Library::getExports() const {
         return exports;
     }
