@@ -246,4 +246,32 @@ end
 ]=]
 fs.open = (nil :: any) :: Open
 
+export type HashAlgorithm = "md5" | "blake2b-128" | "blake2b-256"
+
+--[=[
+	Hashes a file's contents. Big files are hashed off the state.
+
+	@param path The file.
+	@param algorithm "md5" by default.
+	@return The lowercase hex digest.
+]=]
+function fs.hashFile(path: string, algorithm: HashAlgorithm?): string
+    return nil :: any
+end
+
+--[=[
+	Finds a byte pattern in a file, such as an instruction sequence in an executable. 
+	Reads the file in chunks, and yields the calling thread while doing so.
+	After a match the search goes on past it, so matches don't overlap.
+
+	@param path The file.
+	@param pattern Hex bytes and ?? wildcards separated by spaces, such as "48 8D 15 ?? ?? ?? ??".
+	@param start The 0-based offset to search from, 0 by default.
+	@param length How many bytes to search, to the end of the file by default.
+	@return The 0-based offsets of the matches, in order.
+]=]
+function fs.findBytes(path: string, pattern: string, start: number?, length: number?): { number }
+    return nil :: any
+end
+
 return table.freeze(fs)

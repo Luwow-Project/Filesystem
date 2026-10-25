@@ -64,6 +64,14 @@ Moves or renames a file or directory.
 
 Opens a file handle. `mode` is one of `"r"` (default), `"w"`, `"a"`, `"r+"`, `"w+"`, `"a+"`.
 
+### `fs.hashFile(path: string, algorithm: string?) -> string`
+
+A file's lowercase hex digest, MD5 by default.
+
+### `fs.findBytes(path: string, pattern: string, start: number?, length: number?) -> { number }`
+
+The 0-based offsets of a byte pattern in the file, or in the range `start` to `start + length`. The pattern is hex bytes and `??` wildcards separated by spaces, such as `"48 8D 15 ?? ?? ?? ??"`. After a match the search continues past it, so matches don't overlap. The file is read in 4 MB chunks off the state.
+
 ## File
 
 ### `file:read(count: number?) -> string`
