@@ -63,6 +63,16 @@ namespace Luwow::Fs {
         raiseError(L, action, path, ec.message());
     }
 
+    inline std::chrono::system_clock::time_point toSystemTime(std::filesystem::file_time_type time) {
+#if defined(_LIBCPP_VERSION)
+        return std::chrono::system_clock::time_point(
+            std::chrono::duration_cast<std::chrono::system_clock::duration>(time.time_since_epoch()));
+#else
+        return std::chrono::time_point_cast<std::chrono::system_clock::duration>(
+            std::chrono::clock_cast<std::chrono::system_clock>(time));
+#endif
+    }
+
     // Reads a string or buffer argument without copying.
     inline const char* checkData(lua_State* L, int index, size_t* length) {
         if (lua_isbuffer(L, index)) {

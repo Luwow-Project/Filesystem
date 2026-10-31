@@ -160,10 +160,7 @@ namespace Luwow::Fs {
         fs::file_time_type writeTime = fs::last_write_time(path, ec);
         if (ec) raiseError(L, "Could not get modification time of", path, ec);
 
-        auto fileTimeDuration = writeTime.time_since_epoch();
-        auto systemTime = std::chrono::system_clock::time_point(
-            std::chrono::duration_cast<std::chrono::system_clock::duration>(fileTimeDuration)
-        );
+        auto systemTime = toSystemTime(writeTime);
         double modified = std::chrono::duration<double>(systemTime.time_since_epoch()).count();
         bool readonly = (status.permissions() & fs::perms::owner_write) == fs::perms::none;
 
