@@ -64,12 +64,15 @@ namespace Luwow::Fs {
     }
 
     inline std::chrono::system_clock::time_point toSystemTime(std::filesystem::file_time_type time) {
-#if defined(_LIBCPP_VERSION)
+#if defined(__cpp_lib_chrono) && __cpp_lib_chrono >= 201907L && !defined(_LIBCPP_VERSION)
+        return std::chrono::time_point_cast<std::chrono::system_clock::duration>(
+            std::chrono::clock_cast<std::chrono::system_clock>(time));
+#elif defined(_LIBCPP_VERSION)
         return std::chrono::system_clock::time_point(
             std::chrono::duration_cast<std::chrono::system_clock::duration>(time.time_since_epoch()));
 #else
         return std::chrono::time_point_cast<std::chrono::system_clock::duration>(
-            std::chrono::clock_cast<std::chrono::system_clock>(time));
+            std::chrono::file_clock::to_sys(time));
 #endif
     }
 
